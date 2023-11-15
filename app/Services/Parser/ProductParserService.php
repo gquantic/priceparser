@@ -50,7 +50,11 @@ class ProductParserService
             }
 
             if (count($shops) > 0) {
-                $arr[$item->find('.model-short-title span')->text] = $pricesArr;
+                $arr[] = [
+                    'img' => $item->find('.list-img img')->getAttribute('src'),
+                    'title' => $item->find('.model-short-title span')->text,
+                    'prices' => $pricesArr
+                ];
             }
         }
 

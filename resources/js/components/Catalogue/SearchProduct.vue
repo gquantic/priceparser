@@ -7,10 +7,17 @@
         </div>
     </div>
     <div class="mt-6">
-        <div v-for="(prices, index) in items" class="price-item">
-            <p>{{ index }}</p>
-            <div class="prices">
-                <p v-for="price in prices">{{ price[0] }}: <span class="price">{{ price[1] }}</span></p>
+        <div v-for="(item, index) in items" class="price-item">
+            <div class="content">
+                <div class="img-block" style="">
+                    <img :src="'https://n-katalog.ru' + item.img" style="" alt="">
+                </div>
+                <div class="desc">
+                    <p>{{ item.title }}</p>
+                    <div class="prices">
+                        <p v-for="price in item.prices">{{ price[0] }}: <span class="price">{{ price[1] }}</span></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
