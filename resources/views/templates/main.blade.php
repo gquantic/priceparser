@@ -16,7 +16,7 @@
     </style>
 
     @vite([
-        'resources/css/app.css',
+        'resources/css/app.scss',
         'resources/js/app.js',
         'resources/sass/styles.scss'
     ])
