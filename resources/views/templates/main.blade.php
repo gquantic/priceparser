@@ -31,7 +31,7 @@
     </header>
 </div>
 
-<div class="container mt-6">
+<div class="container mt-6" id="app">
     @yield('content')
 </div>
 </body>

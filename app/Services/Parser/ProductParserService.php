@@ -45,11 +45,13 @@ class ProductParserService
 
             $count = 0;
             foreach ($shops as $shop) {
-                $pricesArr[] = [html_entity_decode($shop->text), $prices[$count]->text];
+                $pricesArr[] = [str_replace(' ', '', html_entity_decode(str_replace('&nbsp;','', $shop->text))), $prices[$count]->text];
                 $count++;
             }
 
-            $arr[$item->find('.model-short-title span')->text] = $pricesArr;
+            if (count($shops) > 0) {
+                $arr[$item->find('.model-short-title span')->text] = $pricesArr;
+            }
         }
 
         return response()->json($arr);
