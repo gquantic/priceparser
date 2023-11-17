@@ -34,5 +34,38 @@
 <div class="container mt-6" id="app">
     @yield('content')
 </div>
+
+<div style="height: 470px;"></div>
+<footer>
+<div class="container">
+    <div class="footer__column">
+        <h2>{{ config('app.name') }}</h2>
+        <span>Разработка сайта <a href="https://t.me/gapurovich" target="_blank">GQuantic</a></span>
+    </div>
+    <div class="footer__column">
+        <p class="pre-title">Быстрая навигация</p>
+        <a href="">Обратная связь</a>
+        <a href="">Поиск по базе</a>
+        <a href="">Импорт товаров</a>
+    </div>
+    <div class="footer__column">
+        <p class="pre-title">Организациям</p>
+        <a href="">Тарифы</a>
+        <a href="">Быстрый и удобный трекинг <br> цен по API</a>
+        <a href="">Личный кабинет</a>
+    </div>
+    <div class="footer__column">
+        <p class="pre-title">Разработчикам</p>
+        <a href="">API</a>
+        <a href="">Предложения</a>
+    </div>
+    <div class="footer__column">
+        <p class="pre-title">Общая информация</p>
+        <a href="">Руководство по использованию</a>
+        <a href="">О проекте</a>
+        <a href="">Условия использования</a>
+    </div>
+</div>
+</footer>
 </body>
 </html>
