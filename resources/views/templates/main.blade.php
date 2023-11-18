@@ -40,7 +40,7 @@
 <div class="container">
     <div class="footer__column">
         <h2>{{ config('app.name') }}</h2>
-        <span>Разработка сайта <a href="https://t.me/gapurovich" target="_blank">GQuantic</a></span>
+        <span>Разработка сайта <a href="https://t.me/gapurovich" target="_blank">Gapurovich</a></span>
     </div>
     <div class="footer__column">
         <p class="pre-title">Быстрая навигация</p>
