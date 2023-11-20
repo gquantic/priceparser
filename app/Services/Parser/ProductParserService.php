@@ -33,7 +33,13 @@ class ProductParserService
      */
     private function process()
     {
-        $response = $this->client->get("https://n-katalog.ru/search?keyword={$this->name}")->getBody()->getContents();
+        $response = $this->client->get("https://n-katalog.ru/search?keyword={$this->name}");
+
+        if ($response->getStatusCode() != 403) {
+            $response = $response->getBody()->getContents();
+        } else {
+            $response = file_get_contents("https://n-katalog.ru/search?keyword={$this->name}");
+        }
 
 //        $response = file_get_contents('test.html');
 
