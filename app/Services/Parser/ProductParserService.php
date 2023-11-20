@@ -15,7 +15,12 @@ class ProductParserService
     public function boot($name)
     {
         $this->client = new Client([
-            'User-Agent' => "Mozilla/5.0 (Macintosh; Intel Mac OS X ".rand(9,11)."_".rand(10, 30)."_".rand(1,9).") AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5845." . rand(928, 2913) . " YaBrowser/23.9.0.0 Safari/537.36"
+            'referer' => true,
+            'headers' => [
+                'User-Agent' => "Mozilla/5.0 (Macintosh; Intel Mac OS X ".rand(9,11)."_".rand(10, 30)."_".rand(1,9).") AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5845." . rand(928, 2913) . " YaBrowser/23.9.0.0 Safari/537.36",
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Encoding' => 'gzip, deflate, br',
+            ],
         ]);
         $this->name = $name;
 
