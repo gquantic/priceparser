@@ -29,3 +29,19 @@ Route::get('/logout', function ()
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group([
+    'prefix' => 'my',
+    'as' => 'my.'
+], function () {
+    Route::get('/parse/json/{keywords}')->name('parse.json.keywords');
+    Route::get('/parse/xml/{keywords}')->name('parse.xml.keywords');
+
+    Route::get('/parse/json/')->name('parse.json');
+    Route::get('/parse/xml/')->name('parse.xml');
+    Route::view('/parse/products/', 'profile.parse.products')->name('parse.products');
+
+    Route::view('/plan', 'profile.plan.show')->name('plan');
+
+    Route::get('/balance', 'App\Http\Controllers\Profile\BalanceController@show')->name('balance.show');
+});

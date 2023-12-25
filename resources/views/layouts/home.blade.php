@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>@yield('title', 'Личный кабинет') | PricesLab.ru</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="{{asset('https://fonts.bunny.net')}}">
@@ -56,31 +56,46 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Navbar Search -->
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" data-widget="navbar-search" href="#" role="button">--}}
+{{--                    <i class="fas fa-search"></i>--}}
+{{--                </a>--}}
+{{--                <div class="navbar-search-block">--}}
+{{--                    <form class="form-inline">--}}
+{{--                        <div class="input-group input-group-sm">--}}
+{{--                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">--}}
+{{--                            <div class="input-group-append">--}}
+{{--                                <button class="btn btn-navbar" type="submit">--}}
+{{--                                    <i class="fas fa-search"></i>--}}
+{{--                                </button>--}}
+{{--                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">--}}
+{{--                                    <i class="fas fa-times"></i>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </li>--}}
+
             <li class="nav-item">
-                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                    <i class="fas fa-search"></i>
+                <a class="nav-link" href="{{ route('my.plan') }}">
+                    <i class="fa fa-unlock-alt mr-1"></i>
+                    Бесплатный
                 </a>
-                <div class="navbar-search-block">
-                    <form class="form-inline">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('my.balance.show') }}">
+                    <i class="fas fa-coins mr-1"></i>
+                    {{ \Illuminate\Support\Facades\Auth::user()->balance }} руб.
+                </a>
             </li>
 
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-user mr-1"></i>
+                    {{ \Illuminate\Support\Facades\Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="#" class="dropdown-item">
@@ -175,7 +190,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
+                        <a href="{{ route('home') }}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Панель
@@ -188,7 +203,7 @@
                             <p>
                                 Выгрузка цен
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">2</span>
+                                <span class="badge badge-info right">PRO</span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -201,23 +216,37 @@
                             <li class="nav-item">
                                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Файлом</p>
+                                    <p>JSON</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>XML</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a href="pages/calendar.html" class="nav-link">
-                            <i class="nav-icon far fa-calendar-alt"></i>
+                        <a href="{{ route('my.parse.products') }}" class="nav-link">
+                            <i class="nav-icon fa fa-search" aria-hidden="true"></i>
                             <p>
                                 Парсер товаров
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('my.parse.products') }}" class="nav-link">
+                            <i class="nav-icon fa fa-search" aria-hidden="true"></i>
+                            <p>
+                                Конструктор парсинга
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="pages/gallery.html" class="nav-link">
-                            <i class="nav-icon far fa-image"></i>
+                            <i class="nav-icon fa fa-unlock-alt" aria-hidden="true"></i>
                             <p>
                                 Мой тариф
                             </p>
@@ -237,14 +266,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard v3</h1>
+                        <h1 class="m-0">@yield('title', 'Личный кабинет')</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v3</li>
-                        </ol>
-                    </div><!-- /.col -->
+{{--                    <div class="col-sm-6">--}}
+{{--                        <ol class="breadcrumb float-sm-right">--}}
+{{--                            <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
+{{--                            <li class="breadcrumb-item active">Dashboard v3</li>--}}
+{{--                        </ol>--}}
+{{--                    </div><!-- /.col -->--}}
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
