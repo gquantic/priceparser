@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPHtmlParser\Dom;
 
-class ProductParserServiceCopy
+class ProductParserService
 {
     public string $name;
 
@@ -33,14 +33,14 @@ class ProductParserServiceCopy
      */
     private function process()
     {
-        $response = $this->client->get("https://n-katalog.ru/search?keyword={$this->name}");
+        $url="https://n-katalog.ru/search?keyword={$this->name}";
+        $response = $this->client->get($url);
 
         if ($response->getStatusCode() != 403) {
             $response = $response->getBody()->getContents();
         } else {
-            $response = file_get_contents("https://n-katalog.ru/search?keyword={$this->name}");
+            $response = file_get_contents($url);
         }
-
 //        $response = file_get_contents('test.html');
 
         $arr = [];
@@ -63,7 +63,7 @@ class ProductParserServiceCopy
 
             if (count($shops) > 0) {
                 $arr[] = [
-                    'img' => $item->find('.list-img img')->getAttribute('src'),
+                    'img' => 'https://n-katalog.ru'.$item->find('.list-img img')->getAttribute('src'),
                     'title' => $item->find('.model-short-title span')->text,
                     'prices' => $pricesArr
                 ];

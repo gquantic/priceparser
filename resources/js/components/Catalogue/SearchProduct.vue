@@ -10,7 +10,7 @@
         <div v-for="(item, index) in items" class="price-item">
             <div class="content">
                 <div class="img-block" style="">
-                    <img :src="'https://n-katalog.ru' + item.img" style="" alt="">
+                    <img :src="item.img" style="" alt="">
                 </div>
                 <div class="desc">
                     <p>{{ item.title }}</p>

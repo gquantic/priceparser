@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Route::resource('product', 'App\Http\Controllers\ProductController');
 
+//Route::get('test', 'App\Http\Controllers\TestController@index');
+
+
+
 Auth::routes();
 
 Route::get('/logout', function ()

@@ -31,6 +31,7 @@ class ProductParserService
     /**
      * @throws GuzzleException
      */
+
     private function process()
     {
         $url="https://n-katalog.ru/search?keyword={$this->name}";
@@ -41,9 +42,6 @@ class ProductParserService
         } else {
             $response = file_get_contents($url);
         }
-//        $response = file_get_contents('test.html');
-
-        $arr = [];
 
         $dom = new Dom;
         $dom->loadStr($response);
@@ -63,11 +61,53 @@ class ProductParserService
 
             if (count($shops) > 0) {
                 $arr[] = [
-                    'img' => $item->find('.list-img img')->getAttribute('src'),
+                    'img' => 'https://n-katalog.ru'.$item->find('.list-img img')->getAttribute('src'),
                     'title' => $item->find('.model-short-title span')->text,
                     'prices' => $pricesArr
                 ];
             }
+        }
+
+        //
+
+        $url="https://uslugio.com/krasnodar?search={$this->name}";
+
+        $response = $this->client->get($url);
+
+        if ($response->getStatusCode() != 403) {
+            $response = $response->getBody()->getContents();
+        } else {
+            $response = file_get_contents($url);
+        }
+
+        $dom = new Dom;
+        $dom->loadStr($response);
+
+        $items = $dom->find('.items_n');
+
+        foreach ($items as $item) {
+            $shop = 'uslugio.com';
+            $prices = $item->find('.price_td');
+            $subtitiles = $item->find('.table-price span');
+            $pricesArr = [];
+
+            $count = 0;
+            foreach ($prices as $price)
+            {
+                $pricesArr[] = [html_entity_decode(str_replace('&nbsp;','', $subtitiles[$count]->text)), $prices->text];
+                $count++;
+            }
+
+            if (count($prices) > 0)
+            {
+                $arr[] = [
+                    'img' => $item->find('.showone')->getAttribute('src'),
+                    'title' => $item->find('.title')->text,
+                    'prices' => $pricesArr
+                ];
+            }
+
+
         }
 
         return response()->json($arr);
