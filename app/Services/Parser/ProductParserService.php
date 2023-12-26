@@ -4,6 +4,7 @@ namespace App\Services\Parser;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Arr;
 use PHPHtmlParser\Dom;
 
 class ProductParserService
@@ -34,6 +35,7 @@ class ProductParserService
 
     private function process()
     {
+        #N-KATALOG
         $url="https://n-katalog.ru/search?keyword={$this->name}";
         $response = $this->client->get($url);
 
@@ -68,48 +70,30 @@ class ProductParserService
             }
         }
 
-        //
+        #X_COM
+        $shop = 'xcom-shop.ru';
+        $search=$this->name;
+        $xmlString = file_get_contents(('yaml/market_all.xml'));
+        $xmlObject = simplexml_load_string($xmlString);
 
-        $url="https://uslugio.com/krasnodar?search={$this->name}";
+        $json = json_encode($xmlObject);
+        $phpArray = json_decode($json, true);
+        $phpArray=$phpArray['shop']['offers']['offer'];
 
-        $response = $this->client->get($url);
-
-        if ($response->getStatusCode() != 403) {
-            $response = $response->getBody()->getContents();
-        } else {
-            $response = file_get_contents($url);
-        }
-
-        $dom = new Dom;
-        $dom->loadStr($response);
-
-        $items = $dom->find('.items_n');
-
-        foreach ($items as $item) {
-            $shop = 'uslugio.com';
-            $prices = $item->find('.price_td');
-            $subtitiles = $item->find('.table-price span');
+        foreach ($phpArray as $result)
+        {
             $pricesArr = [];
-
-            $count = 0;
-            foreach ($prices as $price)
+            if(preg_match('*'.$search.'*', $result['name']))
             {
-                $pricesArr[] = [html_entity_decode(str_replace('&nbsp;','', $subtitiles[$count]->text)), $prices->text];
-                $count++;
-            }
-
-            if (count($prices) > 0)
-            {
+                $pricesArr[]=[$shop, $result['price'].' руб.'];
                 $arr[] = [
-                    'img' => $item->find('.showone')->getAttribute('src'),
-                    'title' => $item->find('.title')->text,
+                    'img' => $result['picture'],
+                    'title' => $result['name'],
                     'prices' => $pricesArr
                 ];
             }
 
-
         }
-
         return response()->json($arr);
     }
 }

@@ -80,7 +80,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('my.plan') }}">
                     <i class="fa fa-unlock-alt mr-1"></i>
-                    Бесплатный
+                    @switch(\Illuminate\Support\Facades\Auth::user()->plan)
+                        @case('free')
+                            Бесплатный
+                        @break
+                        @case('pro')
+                            PRO
+                        @break
+                        @case('business')
+                            Бизнес
+                        @break
+                    @endswitch
                 </a>
             </li>
 
@@ -190,7 +200,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link">
+                        <a href="{{ route('home') }}" class="nav-link @yield('panel')">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Панель
@@ -229,10 +239,18 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('my.parse.products') }}" class="nav-link">
+                        <a href="{{ route('my.parse.products') }}" class="nav-link @yield('product-parser')">
                             <i class="nav-icon fa fa-search" aria-hidden="true"></i>
                             <p>
                                 Парсер товаров
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('my.parse.services') }}" class="nav-link @yield('services-parser')">
+                            <i class="nav-icon fa fa-search" aria-hidden="true"></i>
+                            <p>
+                                Парсер услуг
                             </p>
                         </a>
                     </li>
@@ -245,7 +263,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
+                        <a href="{{ route('my.plan') }}" class="nav-link">
                             <i class="nav-icon fa fa-unlock-alt" aria-hidden="true"></i>
                             <p>
                                 Мой тариф
@@ -326,5 +344,7 @@
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
+
+@stack('scripts')
 </body>
 </html>

@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('product', 'App\Http\Controllers\ProductController');
+Route::resource('service', 'App\Http\Controllers\ServicesController');
 
 //Route::get('test', 'App\Http\Controllers\TestController@index');
 
@@ -44,8 +45,10 @@ Route::group([
     Route::get('/parse/json/')->name('parse.json');
     Route::get('/parse/xml/')->name('parse.xml');
     Route::view('/parse/products/', 'profile.parse.products')->name('parse.products');
+    Route::view('/parse/services/', 'profile.parse.services')->name('parse.services');
 
     Route::view('/plan', 'profile.plan.show')->name('plan');
+    Route::get('/plan/upgrade/{plan}', 'App\Http\Controllers\Profile\PlanController@upgrade');
 
     Route::get('/balance', 'App\Http\Controllers\Profile\BalanceController@show')->name('balance.show');
 });
