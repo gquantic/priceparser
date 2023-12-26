@@ -80,7 +80,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('my.plan') }}">
                     <i class="fa fa-unlock-alt mr-1"></i>
-                    Бесплатный
+                    @switch(\Illuminate\Support\Facades\Auth::user()->plan)
+                        @case('free')
+                            Бесплатный
+                        @break
+                        @case('pro')
+                            PRO
+                        @break
+                        @case('business')
+                            Бизнес
+                        @break
+                    @endswitch
                 </a>
             </li>
 
@@ -245,7 +255,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
+                        <a href="{{ route('my.plan') }}" class="nav-link">
                             <i class="nav-icon fa fa-unlock-alt" aria-hidden="true"></i>
                             <p>
                                 Мой тариф
@@ -326,5 +336,7 @@
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
+
+@stack('scripts')
 </body>
 </html>
