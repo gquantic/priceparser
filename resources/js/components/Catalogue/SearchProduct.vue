@@ -15,7 +15,7 @@
                 <div class="desc">
                     <p>{{ item.title }}</p>
                     <div class="prices">
-                        <p v-for="price in item.prices">{{ price[0] }}: <span class="price">{{ price[1] }}</span></p>
+                        <p v-for="price in item.prices">{{ price[0] }}: <span class="price">{{ formatPrice(price[1]) }}</span></p>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,10 @@ export default {
                 console.log(response);
                 this.items = response.data;
             });
-        }
+        },
+        formatPrice(price) {
+            return price.toLocaleString("ru-RU");
+        },
     },
 }
 </script>
