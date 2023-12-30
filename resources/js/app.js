@@ -17,9 +17,13 @@ const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import SearchProduct from "./components/Catalogue/SearchProduct.vue";
+import SearchPage from "./Pages/SearchPage.vue";
+import SearchServices from "./components/Parser/SearchServices.vue";
 
 app.component('example-component', ExampleComponent);
 app.component('search-component', SearchProduct);
+app.component('search-services', SearchServices);
+app.component('search-page', SearchPage);
 
 /**
  * The following block of code may be used to automatically register your

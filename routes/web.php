@@ -36,7 +36,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group([
     'prefix' => 'my',
-    'as' => 'my.'
+    'as' => 'my.',
+    'middleware' => 'auth',
 ], function () {
     Route::get('/parse/json/{keywords}')->name('parse.json.keywords');
     Route::get('/parse/xml/{keywords}')->name('parse.xml.keywords');
