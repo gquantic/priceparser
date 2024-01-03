@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\NewUserRegistered;
+use App\Events\UserPayment;
+use App\Listeners\userRegisterAdminNotifications;
+use App\Listeners\RegisterNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        NewUserRegistered::class =>[
+            RegisterNotification::class,
+            UserRegisterAdminNotifications::class
+        ],
+        UserPayment::class=>[
+
+        ]
     ];
 
     /**
