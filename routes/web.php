@@ -30,7 +30,7 @@ Route::get('/logout', function ()
 {
     Auth::logout();
     return redirect('/login');
-})->name('logout');
+})->name('force-logout');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -52,4 +52,15 @@ Route::group([
     Route::get('/plan/upgrade/{plan}', 'App\Http\Controllers\Profile\PlanController@upgrade');
 
     Route::get('/balance', 'App\Http\Controllers\Profile\BalanceController@show')->name('balance.show');
+    Route::get('/balance/edit', 'App\Http\Controllers\Profile\BalanceController@edit')->name('balance.edit');
+    Route::patch('/balance', 'App\Http\Controllers\Profile\BalanceController@update')->name('balance.update');
+
+    #ADMIN
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
+        Route::get('/', 'App\Http\Controllers\Admin\HomeController@show')->name('admin.index');
+        Route::get('/users', 'App\Http\Controllers\Admin\HomeController@users')->name('admin.users');
+        Route::get('/notifications', 'App\Http\Controllers\Admin\HomeController@notifications')->name('admin.notifications');
+    });
 });
+
+

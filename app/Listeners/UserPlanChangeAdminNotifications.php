@@ -2,13 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\NewUserRegistered;
+use App\Events\UserPlanChange;
 use App\Models\AdminNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-
-class UserRegisterAdminNotifications
+class UserPlanChangeAdminNotifications
 {
     /**
      * Create the event listener.
@@ -21,10 +20,11 @@ class UserRegisterAdminNotifications
     /**
      * Handle the event.
      */
-    public function handle(NewUserRegistered $event): void
+    public function handle(UserPlanChange $event): void
     {
         $username=$event->username;
-        $message=['message'=>'Зарегистрировался новый пользователь “'.$username.'”'];
+        $plan=$event->plan;
+        $message=['message'=>'Пользователь '.$username.' изменил тариф на '.$plan];
 
         AdminNotification::create($message);
     }

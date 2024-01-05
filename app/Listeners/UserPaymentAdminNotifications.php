@@ -5,6 +5,8 @@ namespace App\Listeners;
 use App\Events\UserPayment;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Models\AdminNotification;
+
 
 class UserPaymentAdminNotifications
 {
@@ -24,6 +26,7 @@ class UserPaymentAdminNotifications
         $username=$event->username;
         $payment=$event->payment;
 
-        $message='Пользователь '.$username.' пополнил баланс на '.$payment.' рублей';
+        $message=['message'=>'Пользователь '.$username.' пополнил баланс на '.$payment.' рублей'];
+        AdminNotification::create($message);
     }
 }

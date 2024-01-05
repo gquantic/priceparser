@@ -25,6 +25,5 @@ class RegisterNotification
     {
         $email=$event->email;
         Mail::to($email)->send(new RegisterMail());
-
     }
 }

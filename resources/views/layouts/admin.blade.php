@@ -77,29 +77,32 @@
 {{--                </div>--}}
 {{--            </li>--}}
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('my.plan') }}">
-                    <i class="fa fa-unlock-alt mr-1"></i>
-                    @switch(\Illuminate\Support\Facades\Auth::user()->plan)
-                        @case('free')
-                            Бесплатный
-                        @break
-                        @case('pro')
-                            PRO
-                        @break
-                        @case('business')
-                            Бизнес
-                        @break
-                    @endswitch
+{{--ADMIN NOTIFICATIONS--}}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">{{count($notifications)}}</span>
                 </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                    @foreach($notifications as $notification)
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-sm">{{$notification->message}}</p>
+                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{date("d.m H:i",(strtotime($notification->created_at)))}}</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                    @endforeach
+                    <div class="dropdown-divider"></div>
+                    <a href="{{route('my.admin.notifications')}}" class="dropdown-item dropdown-footer">Все сообщения</a>
+                </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('my.balance.show') }}">
-                    <i class="fas fa-coins mr-1"></i>
-                    {{ \Illuminate\Support\Facades\Auth::user()->balance }} руб.
-                </a>
-            </li>
+{{--/ADMIN NOTIFICATIONS--}}
 
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
@@ -108,42 +111,6 @@
                     {{ \Illuminate\Support\Facades\Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-
-                    <a href="{{ route('my.balance.show') }}" class="dropdown-item">
-                        <div class="media">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    <i class="fas fa-coins" style="margin-right: 10px"></i> Баланс
-                                </h3>
-                            </div>
-                        </div>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a href="#" class="dropdown-item">
-                        <div class="media">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    <i class="far fa-file-alt" style="margin-right: 10px"></i> Документация
-                                </h3>
-                            </div>
-                        </div>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a href="{{ route('my.balance.show') }}" class="dropdown-item">
-                        <div class="media">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    <i class="far fa-user" style="margin-right: 10px"></i> Профиль
-                                </h3>
-                            </div>
-                        </div>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
 
                     <a href="{{asset(route('force-logout'))}}" class="dropdown-item">
                         <!-- Message Start -->
@@ -201,73 +168,19 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link @yield('panel')">
-                            <i class="nav-icon fas fa-th"></i>
+                        <a href="{{ route('my.admin.users') }}" class="nav-link @yield('users')">
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Панель
+                                Пользователи
                             </p>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p>
-                                Выгрузка цен
-                                <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">PRO</span>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>API</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>JSON</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>XML</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('my.parse.products') }}" class="nav-link @yield('product-parser')">
-                            <i class="nav-icon fa fa-search" aria-hidden="true"></i>
+                        <a href="{{ route('my.admin.notifications') }}" class="nav-link @yield('notifications')">
+                            <i class="nav-icon far fa-envelope" aria-hidden="true"></i>
                             <p>
-                                Парсер товаров
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('my.parse.services') }}" class="nav-link @yield('services-parser')">
-                            <i class="nav-icon fa fa-search" aria-hidden="true"></i>
-                            <p>
-                                Парсер услуг
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('my.parse.products') }}" class="nav-link">
-                            <i class="nav-icon fa fa-search" aria-hidden="true"></i>
-                            <p>
-                                Конструктор парсинга
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('my.plan') }}" class="nav-link">
-                            <i class="nav-icon fa fa-unlock-alt" aria-hidden="true"></i>
-                            <p>
-                                Мой тариф
+                                Сообщения
                             </p>
                         </a>
                     </li>

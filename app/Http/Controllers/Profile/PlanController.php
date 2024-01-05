@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Events\UserPlanChange;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +19,8 @@ class PlanController extends Controller
             Auth::user()->active_to = Carbon::now()->addDays(31)->format('Y-m-d H:i:s');
 
             Auth::user()->save();
+
+            event(new UserPlanChange(auth()->user()->name, $plan));
 
             return redirect()->back()->with('success', 'Тариф успешно изменён');
         } else {
