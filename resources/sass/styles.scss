@@ -1,8 +1,18 @@
 $primary-color: #0ec8cb;
-$background: #fff;
+$background: rgba(15, 23, 42, 1);
 
 *, *::before, *::after {
     box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+body {
+    background: $background !important;
+    color: #fff;
 }
 
 .container {
