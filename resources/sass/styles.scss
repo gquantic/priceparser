@@ -1,8 +1,18 @@
 $primary-color: #0ec8cb;
-$background: #fff;
+$background: rgba(15, 23, 42, 1);
 
 *, *::before, *::after {
     box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+body {
+    background: $background !important;
+    color: #4c4e52;
 }
 
 .container {
@@ -287,6 +297,35 @@ footer {
 .menu-container i
 {
     margin-right: 5px;
+}
+
+.select-parser {
+    display: flex;
+    justify-content: start;
+    margin-top: 10px;
+
+    button {
+        margin-right: 15px;
+        width: 150px;
+        background: rgba(0,0,0,.05);
+        height: 40px;
+        border-radius: 7px;
+        font-size: 15px;
+        font-weight: 600;
+
+        &.active {
+            background: rgba(0,0,0,1);
+            color: #fff;
+        }
+    }
+}
+
+.parser-block {
+    display: none;
+
+    &.show {
+        display: block;
+    }
 }
 
 .select-parser {

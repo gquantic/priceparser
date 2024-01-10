@@ -20,8 +20,6 @@
         'resources/js/app.js',
         'resources/sass/styles.scss'
     ])
-
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 </head>
 <body class="antialiased bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter">
 <div class="container">

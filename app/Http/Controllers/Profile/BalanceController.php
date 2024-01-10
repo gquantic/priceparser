@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Events\UserPayment;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\Plan\PlanService;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\PayTransaction;
@@ -12,11 +13,20 @@ use Illuminate\Support\Facades\Auth;
 
 class BalanceController extends Controller
 {
+
+    protected PlanService $PlanService;
+
+    public function __construct(PlanService $PlanService)
+    {
+        $this->PlanService=$PlanService;
+    }
+
     public function show()
     {
-        $plan=Product::query()->where('title','=',auth()->user()->plan)->select('title')->first();
-        //dd($plan);
-        return view('balance.view', compact(['plan']));
+        $plan=$this->PlanService->check_plan();
+        $expire_date=$this->PlanService->plan_expire_date();
+        $limit=$this->PlanService->check_limit();
+        return view('balance.view', compact(['plan', 'expire_date', 'limit']));
     }
 
     public function edit()

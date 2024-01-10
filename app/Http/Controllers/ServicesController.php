@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Services\Parser\ServicesParserService;
+use App\Services\Plan\PlanService;
 use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
     protected ServicesParserService $ServicesParserService;
+    protected PlanService $PlanService;
 
-    public function __construct(ServicesParserService $ServicesParserService)
+
+    public function __construct(ServicesParserService $ServicesParserService, PlanService $PlanService)
     {
         $this->ServicesParserService = $ServicesParserService;
+        $this->PlanService=$PlanService;
     }
 
     /**
@@ -36,7 +40,15 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->ServicesParserService->boot($request->post('title'));
+        if($this->PlanService->request_available==true)
+        {
+            $this->PlanService->incr_limit();
+            return $this->ServicesParserService->boot($request->post('title'));
+        }
+        else
+        {
+            return 'Сегодня больше нет доступных запросов';
+        }
     }
 
     /**

@@ -18,23 +18,23 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">Тариф</h5>
-                                <span class="description-text">{{$plan->title}}</span>
+                                <span class="description-text">{{$plan}}</span>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
-                                <h5 class="description-header">13,000</h5>
-                                <span class="description-text">FOLLOWERS</span>
+                                <h5 class="description-header">Действует до</h5>
+                                <span class="description-text">{{$expire_date}}</span>
                             </div>
                             <!-- /.description-block -->
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4">
                             <div class="description-block">
-                                <h5 class="description-header">35</h5>
-                                <span class="description-text">PRODUCTS</span>
+                                <h5 class="description-header">Запросов осталось</h5>
+                                <span class="description-text">{{$limit['left']}}/{{$limit['total']}}</span>
                             </div>
                             <!-- /.description-block -->
                         </div>

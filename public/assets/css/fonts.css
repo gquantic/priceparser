@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "Sf Pro Text";
+    font-style: normal;
+    font-weight: 300;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("SF Pro Text"),
+        /* Если не получилось, загрузит woff2 */
+    url("/assets/fonts/SfProText/SFProText-Light.ttf");
+}
+@font-face {
+    font-family: "Sf Pro Text";
+    font-style: normal;
+    font-weight: 400;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("SF Pro Text"),
+        /* Если не получилось, загрузит woff2 */
+    url("/assets/fonts/SfProText/SFProText-Regular.ttf");
+}
+@font-face {
+    font-family: "Sf Pro Text";
+    font-style: normal;
+    font-weight: 500;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("SF Pro Text"),
+        /* Если не получилось, загрузит woff2 */
+    url("/assets/fonts/SfProText/SFProText-Semibold.ttf");
+}
+@font-face {
+    font-family: "Sf Pro Text";
+    font-style: normal;
+    font-weight: 600;
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("SF Pro Text"),
+        /* Если не получилось, загрузит woff2 */
+    url("/assets/fonts/SfProText/SFProText-Bold.ttf");
+}
+
+body {
+    font-family: "Sf Pro Text";
+}

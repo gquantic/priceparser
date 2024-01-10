@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Services\Parser\ProductParserService;
+use App\Services\Plan\PlanService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     protected ProductParserService $productParserService;
+    protected PlanService $PlanService;
 
-    public function __construct(ProductParserService $productParserService)
+    public function __construct(ProductParserService $productParserService, PlanService $PlanService)
     {
         $this->productParserService = $productParserService;
+        $this->PlanService=$PlanService;
     }
 
     /**
@@ -36,7 +39,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->productParserService->boot($request->post('title'));
+        if($this->PlanService->request_available==true)
+        {
+            $this->PlanService->incr_limit();
+            return $this->productParserService->boot($request->post('title'));
+        }
+        else
+        {
+            return 'Сегодня больше нет доступных запросов';
+        }
     }
 
     /**

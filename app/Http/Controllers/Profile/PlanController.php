@@ -13,9 +13,24 @@ class PlanController extends Controller
     public function upgrade($plan)
     {
         if (Auth::user()->balance >= config('plans.prices')[$plan]) {
+
+            switch ($plan)
+            {
+                case 'free':
+                    $limit=50;
+                    break;
+                case 'pro':
+                    $limit=100;
+                    break;
+                case 'business':
+                    $limit=1000;
+                    break;
+            }
+
             Auth::user()->balanceMinus(config('plans.prices')[$plan]);
             Auth::user()->plan = $plan;
-
+            Auth::user()->daily_limit = $limit;
+            Auth::user()->today_limit = 0;
             Auth::user()->active_to = Carbon::now()->addDays(31)->format('Y-m-d H:i:s');
 
             Auth::user()->save();
