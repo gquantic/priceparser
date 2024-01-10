@@ -256,7 +256,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('my.parse.products') }}" class="nav-link">
+                        <a href="{{ route('my.parse.constructor') }}" class="nav-link @yield('constructor-parser')">
                             <i class="nav-icon fa fa-search" aria-hidden="true"></i>
                             <p>
                                 Конструктор парсинга

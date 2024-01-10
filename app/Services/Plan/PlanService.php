@@ -60,7 +60,7 @@ class PlanService
 
     public function request_available()
     {
-        if(check_limit()['left']>0)
+        if($this->check_limit()['left']>0)
             return true;
         else
             return false;

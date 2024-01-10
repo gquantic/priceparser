@@ -40,14 +40,17 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        if($this->PlanService->request_available==true)
+        if($this->PlanService->request_available()==true)
         {
             $this->PlanService->incr_limit();
             return $this->ServicesParserService->boot($request->post('title'));
         }
         else
         {
-            return 'Сегодня больше нет доступных запросов';
+            return [[
+                'img'=>'https://img.freepik.com/free-vector/warning-sign-gradient-shine_78370-1774.jpg?w=826&t=st=1704902165~exp=1704902765~hmac=024560b184d366f09b9b3cb55f5318e0bcc8bd86879fe88243da71c44af67cba',
+                'title'=>'Сегодня больше нет доступных запросов'
+            ]];
         }
     }
 

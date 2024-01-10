@@ -47,6 +47,7 @@ Route::group([
     Route::get('/parse/xml/')->name('parse.xml');
     Route::view('/parse/products/', 'profile.parse.products')->name('parse.products');
     Route::view('/parse/services/', 'profile.parse.services')->name('parse.services');
+    Route::view('/parse/constructor/', 'profile.parse.constructor')->name('parse.constructor');
 
     Route::view('/plan', 'profile.plan.show')->name('plan');
     Route::get('/plan/upgrade/{plan}', 'App\Http\Controllers\Profile\PlanController@upgrade');
