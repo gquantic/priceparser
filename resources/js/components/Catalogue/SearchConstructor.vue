@@ -17,6 +17,10 @@
                 <label for="" class="mt-2">цена</label>
                 <input type="text" v-model="price" name="price" class="form-control mt-1 shadow hover:no-shadow" placeholder="price">
             </div>
+            <div class="col-4">
+                <label for="" class="mt-2">наименование</label>
+                <input type="text" v-model="title" name="title" class="form-control mt-1 shadow hover:no-shadow" placeholder="price">
+            </div>
         </div>
         <div class="text-right mt-3">
             <button type="submit" class="btn btn-primary mt-2" style="" @click="search">Поиск по товарам</button>
@@ -42,6 +46,8 @@
 </template>
 
 <script>
+import {shallowRef} from "vue";
+
 export default {
     data() {
         return {
@@ -49,6 +55,8 @@ export default {
             product: '',
             img: '',
             price: '',
+            title: '',
+
             items: [],
         }
     },

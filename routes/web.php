@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::resource('product', 'App\Http\Controllers\ProductController');
 Route::resource('service', 'App\Http\Controllers\ServicesController');
+Route::resource('constructor', 'App\Http\Controllers\ConstructorController');
 
 //Route::get('test', 'App\Http\Controllers\TestController@index');
 
