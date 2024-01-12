@@ -7,7 +7,7 @@ use App\Events\UserPayment;
 use App\Events\UserPlanChange;
 use App\Listeners\UserPaymentAdminNotifications;
 use App\Listeners\UserPlanChangeAdminNotifications;
-use App\Listeners\userRegisterAdminNotifications;
+use App\Listeners\UserRegisterAdminNotifications;
 use App\Listeners\RegisterNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
