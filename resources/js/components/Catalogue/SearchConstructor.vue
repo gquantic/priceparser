@@ -2,24 +2,24 @@
     <div class="div mt-2">
         <div class="row">
             <label for="" class="mt-2">Ссылка на страницу</label>
-            <input type="text" v-model="href" name="href" class="form-control mt-1 shadow hover:no-shadow" placeholder="https://example.com">
+            <input type="text" v-model="href" name="href" class="form-control mt-1 shadow hover:no-shadow" required placeholder="https://example.com">
         </div>
         <div class="row div mt-2">
             <div class="col-4">
                 <label for="" class="mt-2">карточка товара</label>
-                <input type="text" v-model="product" name="product" class="form-control mt-1 shadow hover:no-shadow" placeholder="product">
+                <input type="text" v-model="product" name="product" class="form-control mt-1 shadow hover:no-shadow" required placeholder="product">
             </div>
             <div class="col-4">
                 <label for="" class="mt-2">изображение</label>
-                <input type="text" v-model="img" name="img" class="form-control mt-1 shadow hover:no-shadow" placeholder="img">
+                <input type="text" v-model="img" name="img" class="form-control mt-1 shadow hover:no-shadow" required placeholder="img">
             </div>
             <div class="col-4">
                 <label for="" class="mt-2">цена</label>
-                <input type="text" v-model="price" name="price" class="form-control mt-1 shadow hover:no-shadow" placeholder="price">
+                <input type="text" v-model="price" name="price" class="form-control mt-1 shadow hover:no-shadow" required placeholder="price">
             </div>
             <div class="col-4">
                 <label for="" class="mt-2">наименование</label>
-                <input type="text" v-model="title" name="title" class="form-control mt-1 shadow hover:no-shadow" placeholder="price">
+                <input type="text" v-model="title" name="title" class="form-control mt-1 shadow hover:no-shadow" required placeholder="price">
             </div>
         </div>
         <div class="text-right mt-3">
